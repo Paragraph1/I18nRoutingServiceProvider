@@ -13,12 +13,14 @@ class I18nRoutingServiceProviderTest extends \PHPUnit_Framework_TestCase
     private function createApplication()
     {
         $app = new Application();
+        $app['locale'] = 'en';
+
         $app->register(new TranslationServiceProvider());
         $app->register(new I18nRoutingServiceProvider());
 
-        $app['i18n_routing.locales'] = array('en', 'ua');
+        $app['i18n_routing.locales'] = array('en', 'eu');
         $app['translator.domains'] = array('routes' => array(
-            'ua' => array('test' => '/тест'),
+            'eu' => array('test' => '/entsegu-bat'),
         ));
 
         return $app;
@@ -32,7 +34,8 @@ class I18nRoutingServiceProviderTest extends \PHPUnit_Framework_TestCase
             return 'ok';
         })->bind('test');
 
-        $this->assertEquals(200, $app->handle(Request::create('/test'))->getStatusCode());
+        $this->assertEquals(404, $app->handle(Request::create('/test'))->getStatusCode());
+        $this->assertEquals(200, $app->handle(Request::create('/en/test'))->getStatusCode());
     }
 
     public function testDefaultLocaleWithPrefixI18nRoutes()
@@ -43,7 +46,7 @@ class I18nRoutingServiceProviderTest extends \PHPUnit_Framework_TestCase
             return 'ok';
         });
 
-        $this->assertEquals(404, $app->handle(Request::create('/en/'))->getStatusCode());
+        $this->assertEquals(200, $app->handle(Request::create('/en/'))->getStatusCode());
     }
 
     public function testNonDefaultLocaleI18nRoutes()
@@ -54,6 +57,19 @@ class I18nRoutingServiceProviderTest extends \PHPUnit_Framework_TestCase
             return 'ok';
         })->bind('test');
 
-        $this->assertEquals(200, $app->handle(Request::create('/ua/тест'))->getStatusCode());
+        $this->assertEquals(200, $app->handle(Request::create('/eu/entsegu-bat'))->getStatusCode());
+    }
+
+    public function testExcludeRoute()
+    {
+        $app = $this->createApplication();
+
+        $app->get('/test', function() {
+            return 'ok';
+        })->bind('test')->getRoute()->setOption('i18n', false);
+
+        $this->assertEquals(200, $app->handle(Request::create('/test'))->getStatusCode());
+        $this->assertEquals(404, $app->handle(Request::create('/en/test'))->getStatusCode());
+        $this->assertEquals(404, $app->handle(Request::create('/eu/test'))->getStatusCode());
     }
 }
