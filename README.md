@@ -1,4 +1,6 @@
-I18n Routing Service Provider  [![Build Status](https://travis-ci.org/Paragraph1/I18nRoutingServiceProvider.svg?branch=master)](https://travis-ci.org/Paragraph1/I18nRoutingServiceProvider)
+I18n Routing Service Provider  
+[![Build Status](https://travis-ci.org/Paragraph1/I18nRoutingServiceProvider.svg?branch=master)](https://travis-ci.org/Paragraph1/I18nRoutingServiceProvider)
+[![Coverage Status](https://coveralls.io/repos/github/Paragraph1/php-fcm/badge.svg?branch=master)](https://coveralls.io/github/Paragraph1/php-fcm?branch=master)
 =============================
 
 Silex i18n routing service provider inspired by [JMSI18nRoutingBundle](https://github.com/schmittjoh/JMSI18nRoutingBundle)
@@ -60,4 +62,18 @@ $app->get('/dont-translate', function() {
     //...
 })->bind('my_route')->getRoute()->setOption('i18n', false);
 
+# Careful when using Silex\Provider\TranslationServiceProvider
+
+```php
+$app = new Application();
+// when also using TranslationServiceProvider add your routes when registering it:
+$app->register(new Jenyak\I18nRouting\Provider\I18nRoutingServiceProvider());
+...
+$app->register(new \Silex\Provider\TranslationServiceProvider(), array(
+    'locale_fallbacks' => array('en'),
+    'translator.domains' => array(
+        'fr' => array('test_route' => '/entsegu-bat')
+    )
+));
+```
 
