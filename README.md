@@ -1,6 +1,6 @@
 I18n Routing Service Provider  
 [![Build Status](https://travis-ci.org/Paragraph1/I18nRoutingServiceProvider.svg?branch=master)](https://travis-ci.org/Paragraph1/I18nRoutingServiceProvider)
-[![Coverage Status](https://coveralls.io/repos/github/Paragraph1/php-fcm/badge.svg?branch=master)](https://coveralls.io/github/Paragraph1/php-fcm?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/Paragraph1/I18nRoutingServiceProvider/badge.svg?branch=master)](https://coveralls.io/github/Paragraph1/I18nRoutingServiceProvider?branch=master)
 =============================
 
 Silex i18n routing service provider inspired by [JMSI18nRoutingBundle](https://github.com/schmittjoh/JMSI18nRoutingBundle)
