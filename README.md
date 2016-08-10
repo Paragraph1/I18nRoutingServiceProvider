@@ -1,4 +1,4 @@
-I18n Routing Service Provider  [![Build Status](https://secure.travis-ci.org/jenyak/I18nRoutingServiceProvider.png)](http://travis-ci.org/jenyak/I18nRoutingServiceProvider)
+I18n Routing Service Provider  [![Build Status](https://travis-ci.org/Paragraph1/I18nRoutingServiceProvider.svg?branch=master)](https://travis-ci.org/Paragraph1/I18nRoutingServiceProvider)
 =============================
 
 Silex i18n routing service provider inspired by [JMSI18nRoutingBundle](https://github.com/schmittjoh/JMSI18nRoutingBundle)
